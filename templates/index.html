@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        <label for="name_set">Nazwa zestawu</label>
+        <input type="text" name="name_set">
+        <label for="description">Opis</label>
+        <input type="text" name="description" id="">
+        {% if error%}
+        <div id="error">
+            {{error}}
+        </div>
+        {% endif %}
+        <div id="box_form">
+
+            <label for="concept">Pojęcie</label>
+            <input type="text" name="concept" id="">
+            <label for="definition">Definicja</label>
+            <input type="text" name="definition" id="">
+
+
+        </div>
+        <input type="button" value="Dodaj" onclick="add_input()">
+        <input type="submit" value="Zapisz">
+    </form>
+
+
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+
+</body>
+
+</html>
