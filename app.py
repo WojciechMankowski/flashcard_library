@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Flashcard import Flashcard
 from flask_bootstrap import Bootstrap
-
+from flask_less import lessc
 
 app = Flask(__name__)
 Bootstrap(app)
+lessc(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 
@@ -12,13 +13,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 
 @app.route("/create-set", methods=['GET', 'POST'])
 def create_set():
-
     return render_template('create-set.html')
 @app.route('/')
 def index():
     return render_template('upload.html')
 
-
+@app.route("/registration", methods=["GET", "POST"])
+def registration():
+    return render_template("registration.html")
 def type_check(picture):
     print("type")
     if picture.mimetype[:5] == "image":
