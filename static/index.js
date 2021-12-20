@@ -28,3 +28,9 @@ function add_label(name, name_pl){
     console.log(box);
     box.appendChild(label);
 }
+function check_menu(){
+    let menu = document.getElementsByClassName("navbar-toggler");
+    menu.ariaExpanded = "false";
+    console.log(menu.ariaExpanded);
+    menu.ariaExpanded = "true";
+    }

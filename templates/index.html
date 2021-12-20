@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<div id="form">
     <form action="" method="post">
         <label for="name_set">Nazwa zestawu</label>
         <input type="text" name="name_set">
@@ -33,10 +27,6 @@
         <input type="button" value="Dodaj" onclick="add_input()">
         <input type="submit" value="Zapisz">
     </form>
+</div>
 
-
-    <script src="{{url_for('static', filename='index.js')}}"></script>
-
-</body>
-
-</html>
+{% endblock %}
