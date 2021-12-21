@@ -15,4 +15,4 @@ class SetOfFlashcardsModels(db.Model):
     id_user = db.Column(db.Integer, db.ForeignKey('user.id_user'))
     name_set = db.Column(db.String(100), unique=True, nullable=False)
     description  = db.Column(db.TEXT, unique=True, nullable=False)
-    image
+    image =
