@@ -1,35 +1,49 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from Flashcard import Flashcard
-from DataBase import User, app
+from DataBase import User, app, db
+from Forms import UserForm
+from FunctionsAdd import *
 
 @app.route("/create-set", methods=['GET', 'POST'])
 def create_set():
     return render_template('create-set.html')
+
 @app.route('/')
 def index():
     return render_template('upload.html')
 
 @app.route("/registration", methods=["GET", "POST"])
-def registration():
-    if request.method == "POST":
-        if itEmpty(request.form.getlist("email")) and itEmpty(request.form.getlist("password")):
-            email = request.form["email"]
-            password = request.form["password"]
-            user = User(email=email, password=password)
-            user.creater_id_user()
-        return render_template("registration.html")
+def reg():
+    email = None
+    form = UserForm(request.form)
+    if request.method == "POST" and CheckingTheForm(form):
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None:
+            user = User(password=form.password.data, email=form.email.data)
+            db.session.add(user)
+            db.session.commit()
+        email = form.email.data
+        form.email.data = ''
+        form.password.data = ""
+        flash("Zostałeść pomyślnie zerestrowany :)")
 
-@app.route("/login", mimetypes=["GET", "POST"])
-def login():
-    return render_template("login.html")
+    return render_template("registration.html",
+                           form=form,
+                           email=email,
 
-def type_check(picture):
-    print("type")
-    if picture.mimetype[:5] == "image":
-        return True
-    else:
-        return False
+                           )
 
+# def registration():
+#     if request.method == "POST":
+#         if itEmpty(request.form.getlist("email")) and itEmpty(request.form.getlist("password")):
+#             email = request.form["email"]
+#             password = request.form["password"]
+#             user = User(email=email, password=password)
+#         return render_template("registration.html")
+
+# @app.route("/login", mimetypes=["GET", "POST"])
+# def login():
+#     return render_template("login.html")
 
 @app.route('/create-set', methods=['POST'])
 def upload_file():
@@ -54,16 +68,6 @@ def upload_file():
     else:
         return render_template("index.html", error="Pojawiły się błedy")
     return redirect(url_for('index'))
-
-
-def itEmpty(list: list[str]) -> bool:
-    isEmpty = True
-    for index, item in enumerate(list):
-        print(item)
-        if item == "":
-            isEmpty = False
-    return isEmpty
-
 
 
 
