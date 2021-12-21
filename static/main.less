@@ -1,0 +1,78 @@
+@bg-color: #ddbd37;
+@color_frist: #f26241;
+@color_second: #ffd326;
+@color_third: #f2b705;
+@color_fourth: #598889;
+
+body {
+  font-family: "Bakbak One";
+  font-size: 25px;
+  margin: 0 !important;
+  color: @color_second;
+}
+.navbar {
+  background-color: @color_second;
+  text-align: center;
+}
+#logo1, #logo2 {
+  font-size: 30px;
+}
+
+#logo1 {
+  color: @color_frist;
+}
+#logo2 {
+  color: @color_fourth;
+}
+.navbar-nav > li {
+  float: left;
+  width: 150px;
+  margin-left: 1px;
+  background-color: @color_second;
+  height: 2em;
+}
+.navbar-nav > li:first-child {
+  margin-left: 0;
+}
+.navbar-nav > li:hover {
+  background-color: @color_third;
+}
+.navbar-nav > li:hover > ul {
+  display: block;
+}
+
+.item_a {
+  padding: 0 5px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+.dropdown-menu {
+  display: none;
+  background-color: @color_second;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.dropdown-item:hover{
+    background-color: @color_fourth;
+}
+.dropdown-menu li {
+  position: relative;
+  background-color: @color_fourth;
+}
+.nav-item li:hover > ul {
+  display: block;
+}
+
+}
+.dropdown-menu li a {
+  color: #000;
+}
+
+.dropdown-menu li:hover a {
+    background-color: @color_second;
+    color: @color_frist;
+}
+
+

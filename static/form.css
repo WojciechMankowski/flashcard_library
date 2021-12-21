@@ -1,0 +1,22 @@
+.cointainer {
+  width: 50%;
+  background-color: #f2b705;
+}
+#row {
+  width: 100%;
+  border: #ffd326 1px solid;
+  border-radius: 2px;
+  padding: 10px;
+}
+
+.row input {
+  width: auto;
+  text-align: center;
+  border-bottom: 2px solid #f26241;
+}
+
+#btn-send{
+  background-color: #598889;
+  border: #598889 1px solid;s
+}
+

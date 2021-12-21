@@ -1,0 +1,49 @@
+body {
+  font-family: "Bakbak One";
+  font-size: 25px;
+  margin: 0 !important;
+}
+#logo1, #logo2 {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: normal;
+}
+#logo1 {
+  color: #f26241;
+}
+#logo2 {
+  color: #598889;
+}
+.navbar {
+  background-color: #f2b705;
+}
+.navbar-nav > li {
+  float: left;
+  width: 150px;
+  margin-left: 1px;
+  background-color: #ffd326;
+  line-height: 30px;
+  height: 2em;
+}
+.navbar-nav > li:first-child {
+  margin-left: 0;
+}
+.navbar-nav > li:hover {
+  background-color: #fad12d;
+}
+.navbar-nav > li a:hover {
+  text-decoration: none;
+  color: #598889;
+}
+.navbar-nav > li:hover > ul {
+  display: block;
+}
+.item_a {
+  padding: 0 5px;
+  display: block;
+  text-decoration: none;
+  color: #000;
+}
+
+
+
