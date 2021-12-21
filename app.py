@@ -1,15 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for
 from Flashcard import Flashcard
-from flask_bootstrap import Bootstrap
-from flask_less import lessc
-
-app = Flask(__name__)
-Bootstrap(app)
-lessc(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-
-
-
+from DataBase import User, app
 
 @app.route("/create-set", methods=['GET', 'POST'])
 def create_set():
@@ -20,7 +11,18 @@ def index():
 
 @app.route("/registration", methods=["GET", "POST"])
 def registration():
-    return render_template("registration.html")
+    if request.method == "POST":
+        if itEmpty(request.form.getlist("email")) and itEmpty(request.form.getlist("password")):
+            email = request.form["email"]
+            password = request.form["password"]
+            user = User(email=email, password=password)
+            user.creater_id_user()
+        return render_template("registration.html")
+
+@app.route("/login", mimetypes=["GET", "POST"])
+def login():
+    return render_template("login.html")
+
 def type_check(picture):
     print("type")
     if picture.mimetype[:5] == "image":
