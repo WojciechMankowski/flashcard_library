@@ -21,7 +21,7 @@ def index():
 def upload_file():
     name_set = request.form["name_set"]
     description_set = request.form["description"]
-    set = SetOfFlashcards(name_set, 1, description_set)
+    set = SetOfFlas hcards(name_set, 1, description_set)
     concept = request.form.getlist('concept')
     definition = request.form.getlist('definition')
     isempty_concept = itEmpty(concept)
