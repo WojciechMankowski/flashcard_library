@@ -1,8 +1,13 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import (render_template,
+                   request,
+                   redirect,
+                   url_for)
+from view.Login import login
+from view.registration import register_bp
 from Flashcard import Flashcard
-from DataBase import User, app, db
-from Forms import UserForm
+from DataBase import app
 from FunctionsAdd import *
+
 
 @app.route("/create-set", methods=['GET', 'POST'])
 def create_set():
@@ -10,40 +15,7 @@ def create_set():
 
 @app.route('/')
 def index():
-    return render_template('upload.html')
-
-@app.route("/registration", methods=["GET", "POST"])
-def reg():
-    email = None
-    form = UserForm(request.form)
-    if request.method == "POST" and CheckingTheForm(form):
-        user = User.query.filter_by(email=form.email.data).first()
-        if user is None:
-            user = User(password=form.password.data, email=form.email.data)
-            db.session.add(user)
-            db.session.commit()
-        email = form.email.data
-        form.email.data = ''
-        form.password.data = ""
-        flash("Zostałeść pomyślnie zerestrowany :)")
-
-    return render_template("registration.html",
-                           form=form,
-                           email=email,
-
-                           )
-
-# def registration():
-#     if request.method == "POST":
-#         if itEmpty(request.form.getlist("email")) and itEmpty(request.form.getlist("password")):
-#             email = request.form["email"]
-#             password = request.form["password"]
-#             user = User(email=email, password=password)
-#         return render_template("registration.html")
-
-# @app.route("/login", mimetypes=["GET", "POST"])
-# def login():
-#     return render_template("login.html")
+    return render_template('index.html')
 
 @app.route('/create-set', methods=['POST'])
 def upload_file():
@@ -70,6 +42,9 @@ def upload_file():
     return redirect(url_for('index'))
 
 
+app.register_blueprint(login)
+app.register_blueprint(register_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
+

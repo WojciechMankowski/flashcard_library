@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>My Application</title>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<div class="row">
+  <div class="offset-lg-4 text-center my-4">
+    <h2 class="my-1">Logowanie</h2>
+    <div style="height: 15px;"></div>
+    <form method="post" id="register"> {{ form.csrf_token }}
+      <div class="form-group text-left my-1">
+      <label for="email">Adres Email</label>
+      {{ form.email(class="form-control") }}
+    </div>
+      <div class="form-group text-left my-1">
+      <label for="password">Hasło</label> 
+      {{ form.password(class="form-control") }}
+      
+    </div>
+    
+      {{ form.sumbit(class="btn-warning btn-lg btn-block", id="btn-send") }}
+    </form>
+
+
+  </div>
+ 
+
+
+
+
+
+
+
+{% endblock %}

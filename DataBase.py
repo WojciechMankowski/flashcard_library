@@ -3,14 +3,14 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 
-
-
 app = Flask(__name__)
 Bootstrap(app)
-path = r"C:\Users\wojte\Desktop\fiszkiFlask\db.sqlite"
+path = r"E:\projekty\fiszkiFlask\db.sqlite"
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{path}"
 app.config["SECRET_KEY"] = '571ebf8e13ca209536c29be68d435c00'
 db = SQLAlchemy(app)
+
+
 
 class User(db.Model):
     id = Column(Integer, primary_key=True)
@@ -23,8 +23,10 @@ class User(db.Model):
         self.id_user = self.creater_id()
         self.password = password
         self.email = email
+
     def __repr__(self):
         return f"User: {self.email}"
+
     def creater_id(self):
         query = User.query.all()
         if len(query) == 0:
@@ -33,9 +35,15 @@ class User(db.Model):
             data = query[len(query)-1]
             return data.id +1
 
-
-
-
+def login_validator(email: str, password:str):
+    query = User.query.filter_by(email=email).first()
+    if query != None:
+        if query.password == password:
+            return True
+        else:
+            return False
+    else:
+        return False
 
 # class SetOfFlashcardsModels(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
